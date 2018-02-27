@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
 import com.challenge.survey.vehicle.model.SurveyData;
+import com.challenge.survey.vehicle.settings.SurveySessions;
 
 public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<CountingStatistics> {
 
@@ -17,12 +18,20 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 		periodTypeMessage = String.format("Displaying statistics every %d minutes", minutes);
 	}
 
-	public TimePeriodStatCollector(List<List<LocalTime>> sessions) {
+	/*public TimePeriodStatCollector(List<List<LocalTime>> sessions) {
 		super(sessions);
 		String seassions = sessions.stream().map(season -> String.format("[%s - %s]", season.get(0), season.get(1)))
 				.collect(Collectors.joining(", "));
 
 		periodTypeMessage = "Displaying statistics sessions: " + seassions;
+	}*/
+
+	public TimePeriodStatCollector(List<SurveySessions> sessions) {
+		super(sessions);
+		
+		String seassions = sessions.stream().map(season -> String.format("%s [%s - %s]",season.getSession(),season.getStartTime(),season.getEndTime())).collect(Collectors.joining(", "));
+		
+		periodTypeMessage = "Displaying statistics in session: " + seassions;
 	}
 
 	protected Consumer<CountingStatistics> updateStatics(SurveyData servayData) {
@@ -38,8 +47,14 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 	@Override
 	public void printStatistics() {
 		System.out.println("\n------------------- " + periodTypeMessage + " -------------------");
-		getStatistics().stream().filter(CountingStatistics::isStatistic).forEach(System.out::println);
-		System.out.println("------------------- " + periodTypeMessage + " -------------------\n");
+		List<CountingStatistics>  filteredStatistics = getStatistics().stream().filter(CountingStatistics::isStatistic).collect(Collectors.<CountingStatistics>toList()); 
+		
+		if(filteredStatistics.isEmpty()) {
+			System.out.println("No statistics  found.");
+		}else {
+			filteredStatistics.forEach(System.out::println);
+		}
+//		System.out.println("------------------- " + periodTypeMessage + " -------------------\n");
 	}
 
 	@Override

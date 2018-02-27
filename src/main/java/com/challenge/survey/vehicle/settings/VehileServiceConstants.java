@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public class VehileServiceConstants {
 
 	public static List<LocalTime> MORNING_SESSION = Arrays.asList(LocalTime.of(8, 00), LocalTime.of(11, 59));

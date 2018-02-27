@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
 import com.challenge.survey.vehicle.model.SurveyData;
 import com.challenge.survey.vehicle.model.TimeStatistics;
+import com.challenge.survey.vehicle.settings.SurveySessions;
 import com.challenge.survey.vehicle.utils.DateUtils;
 
 public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
@@ -19,7 +20,7 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
 		timePeriodOrganizer(minuits);
 	}
 
-	public AbstractTimePeriodStatCollector(List<List<LocalTime>> sessions) {
+	/*public AbstractTimePeriodStatCollector(List<List<LocalTime>> sessions) {
 
 		sessions.forEach(seassion -> {
 			LocalTime startingSession = seassion.get(0);
@@ -27,6 +28,14 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
 			statHolder.add(getDataByDateRange(startingSession, endingSession));
 		});
 
+	}*/
+
+	public AbstractTimePeriodStatCollector(List<SurveySessions> sessions) {
+		sessions.forEach(seassion -> {
+			LocalTime startingSession = seassion.getStartTime();
+			LocalTime endingSession = seassion.getEndTime();
+			statHolder.add(getDataByDateRange(startingSession, endingSession));
+		});
 	}
 
 	public void timePeriodOrganizer(long timeGapInMinuits) {
