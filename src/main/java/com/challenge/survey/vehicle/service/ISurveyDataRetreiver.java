@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.challenge.survey.vehicle.model.TimeStatistics;
 
-public interface ISurvayDataRetreiver<T extends TimeStatistics> {
+public interface ISurveyDataRetreiver<T extends TimeStatistics> {
 
 	public List<T> getStatistics();
 	

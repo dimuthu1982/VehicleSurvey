@@ -2,12 +2,12 @@ package com.challenge.survey.vehicle.builder;
 
 import java.util.List;
 
-import com.challenge.survey.vehicle.collectors.ISurvayStatisticCollector;
-import com.challenge.survey.vehicle.feeder.ISurvayStatisticFeeder;
+import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
+import com.challenge.survey.vehicle.feeder.ISurveyStatisticFeeder;
 
 public interface IStatCollectorBuilder {
 
-	public List<ISurvayStatisticCollector> getStatCollectors();
+	public List<ISurveyStatisticCollector> getStatCollectors();
 	
-	public List<ISurvayStatisticFeeder> getStatFeeders();
+	public List<ISurveyStatisticFeeder> getStatFeeders();
 }

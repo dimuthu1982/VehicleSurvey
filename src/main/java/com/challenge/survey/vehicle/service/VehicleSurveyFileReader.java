@@ -5,15 +5,15 @@ import java.util.regex.Pattern;
 
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
 import com.challenge.survey.vehicle.exceptions.UnrecognizedFileContentException;
-import com.challenge.survey.vehicle.model.SurvayData;
+import com.challenge.survey.vehicle.model.SurveyData;
 
-public class VehicleSurvayFileReader extends AbstractSurvayFileReader implements ISurvayFileReader {
+public class VehicleSurveyFileReader extends AbstractSurveyFileReader implements ISurveyFileReader {
 
 	private static final Pattern upStreamMatch = Pattern.compile("^A([\\d]+):A([\\d]+)");
 
 	private static final Pattern downStreamMatch = Pattern.compile("^(A([\\d]+):B([\\d]+))[:(A([\\d]+):B([\\d]+))]");
 
-	public VehicleSurvayFileReader(Path path) {
+	public VehicleSurveyFileReader(Path path) {
 		super(path);
 	}
 
@@ -21,26 +21,26 @@ public class VehicleSurvayFileReader extends AbstractSurvayFileReader implements
 		return Long.parseLong(data.replaceFirst("A", ""));
 	}
 
-	private SurvayData getSurvayData(String line1, String line2, int direction) {
-		return new SurvayData(getTme(line1), getTme(line2), direction);
+	private SurveyData getSurveyData(String line1, String line2, int direction) {
+		return new SurveyData(getTme(line1), getTme(line2), direction);
 	}
 
 	@Override
-	protected SurvayData getSurvayData(String rawData) throws FileReaderSrviceException {
+	protected SurveyData getSurveyData(String rawData) throws FileReaderSrviceException {
 
-		String[] rawDataLines = rawData.split(SurvayFileReader.DELIMETER);
+		String[] rawDataLines = rawData.split(SurveyFileReader.DELIMETER);
 
 		if(rawDataLines.length == 2) {
-			return getSurvayData(rawDataLines[0], rawDataLines[1], SurvayData.DIRECTION_UP);
+			return getSurveyData(rawDataLines[0], rawDataLines[1], SurveyData.DIRECTION_UP);
 
 		}else if(rawDataLines.length == 4) {
-			return getSurvayData(rawDataLines[0], rawDataLines[2], SurvayData.DIRECTION_DOWN);
+			return getSurveyData(rawDataLines[0], rawDataLines[2], SurveyData.DIRECTION_DOWN);
 		}
 		throw new FileReaderSrviceException("Unable to transform data:" + rawData);
 	}
 
 	@Override
-	protected String readRawData(SurvayFileReader fileReader) throws UnrecognizedFileContentException, FileReaderSrviceException {
+	protected String readRawData(SurveyFileReader fileReader) throws UnrecognizedFileContentException, FileReaderSrviceException {
 		
 		String dataLine1 = fileReader.readLines(2);
 		
@@ -49,7 +49,7 @@ public class VehicleSurvayFileReader extends AbstractSurvayFileReader implements
 		}
 
 		String dataLine2 = fileReader.readLines(2);
-		String dataLine = dataLine1.concat(SurvayFileReader.DELIMETER).concat(dataLine2);
+		String dataLine = dataLine1.concat(SurveyFileReader.DELIMETER).concat(dataLine2);
 		if(downStreamMatch.matcher(dataLine).find()) {
 			return dataLine;
 		}

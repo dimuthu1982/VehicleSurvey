@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
-import com.challenge.survey.vehicle.service.ISurvayDataRetreiver;
+import com.challenge.survey.vehicle.service.ISurveyDataRetreiver;
 import com.challenge.survey.vehicle.utils.DateUtils;
 
-public class PeekTimeCalculationFeeder implements ISurvayStatisticFeeder {
+public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 
-	private ISurvayDataRetreiver<CountingStatistics> survayStatisticDataCollection;
+	private ISurveyDataRetreiver<CountingStatistics> surveyStatisticDataCollection;
 
 	private static final int UP_STREAM = 0;
 	private static final int DOWN_STREAM = 1;
@@ -19,8 +19,8 @@ public class PeekTimeCalculationFeeder implements ISurvayStatisticFeeder {
 
 	private List<CountingStatistics> peekTimesDownStream;
 
-	public PeekTimeCalculationFeeder(ISurvayDataRetreiver<CountingStatistics> survayStatisticDataCollection) {
-		this.survayStatisticDataCollection = survayStatisticDataCollection;
+	public PeekTimeCalculationFeeder(ISurveyDataRetreiver<CountingStatistics> surveyStatisticDataCollection) {
+		this.surveyStatisticDataCollection = surveyStatisticDataCollection;
 	}
 
 	@Override
@@ -34,24 +34,24 @@ public class PeekTimeCalculationFeeder implements ISurvayStatisticFeeder {
 	@Override
 	public void printStatisticFeeders() {
 
-		System.out.println("\n------------------- " + survayStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------");
+		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------");
 		if(peekTimesUpStream != null) {
 			
 			System.out.println("Up stream counts : " + peekTimesUpStream.get(0).getUpStreamCount());
 			peekTimesUpStream.forEach(stat -> System.out.println(String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
 		}else {
-			System.out.println("No Data Found");
+			System.out.println("No Data Found for up stream");
 		}
-		System.out.println("------------------- " + survayStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------\n");
+		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------\n");
 
-		System.out.println("\n------------------- " + survayStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------");
+		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------");
 		if(peekTimesDownStream != null) {
 			System.out.println("Down stream counts : " + peekTimesDownStream.get(0).getDownStreamCount());
 			peekTimesDownStream.forEach(stat -> System.out.println(String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
 		}else {
-			System.out.println("No Data Found");
+			System.out.println("No Data Found for up stream");
 		}
-		System.out.println("------------------- " + survayStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------\n");
+		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------\n");
 	}
 
 	private void findPeekTimeSlots(int upStream) {
@@ -77,7 +77,7 @@ public class PeekTimeCalculationFeeder implements ISurvayStatisticFeeder {
 	}
 
 	private List<CountingStatistics> getValidDataByStream(Comparator<CountingStatistics> comparatorField){
-		return survayStatisticDataCollection.getStatistics()
+		return surveyStatisticDataCollection.getStatistics()
 				.stream()
 				.filter(CountingStatistics::isStatistic)
 				.sorted(comparatorField.reversed())

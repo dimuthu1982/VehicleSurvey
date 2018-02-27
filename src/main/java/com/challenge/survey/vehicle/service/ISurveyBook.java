@@ -2,7 +2,7 @@ package com.challenge.survey.vehicle.service;
 
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
 
-public interface ISurvayBook {
+public interface ISurveyBook {
 
-	public void startSurvay() throws FileReaderSrviceException;
+	public void startSurvey() throws FileReaderSrviceException;
 }

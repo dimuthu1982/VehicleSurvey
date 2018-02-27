@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.challenge.survey.vehicle.collectors.ISurvayStatisticCollector;
+import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
 import com.challenge.survey.vehicle.collectors.SpeedDistributionTimePeriodStatCollector;
-import com.challenge.survey.vehicle.feeder.ISurvayStatisticFeeder;
+import com.challenge.survey.vehicle.feeder.ISurveyStatisticFeeder;
 import com.challenge.survey.vehicle.feeder.PeekTimeCalculationFeeder;
-import com.challenge.survey.vehicle.service.ISurvayDataRetreiver;
+import com.challenge.survey.vehicle.service.ISurveyDataRetreiver;
 import com.challenge.survey.vehicle.service.TimePeriodStatCollector;
 import com.challenge.survey.vehicle.settings.VehileServiceConstants;
 
-public class VehicleSurvayStatCollectorBuilder implements IStatCollectorBuilder{
+public class VehicleSurveyStatCollectorBuilder implements IStatCollectorBuilder{
 
-	private List<ISurvayStatisticCollector> statCollectionList = new ArrayList<>();
+	private List<ISurveyStatisticCollector> statCollectionList = new ArrayList<>();
 	
-	private List<ISurvayStatisticFeeder> statCollectionFeederList = new ArrayList<>();
+	private List<ISurveyStatisticFeeder> statCollectionFeederList = new ArrayList<>();
 	
-	public VehicleSurvayStatCollectorBuilder() {
+	public VehicleSurveyStatCollectorBuilder() {
 		
-		ISurvayStatisticCollector timePeriodMinuits60 = new TimePeriodStatCollector(60);
+		ISurveyStatisticCollector timePeriodMinuits60 = new TimePeriodStatCollector(60);
 		
 		statCollectionList.add(timePeriodMinuits60);
 		statCollectionList.add(new TimePeriodStatCollector(30));
@@ -29,16 +29,16 @@ public class VehicleSurvayStatCollectorBuilder implements IStatCollectorBuilder{
 		statCollectionList.add(new TimePeriodStatCollector(Arrays.asList(VehileServiceConstants.MORNING_SESSION, VehileServiceConstants.EVENING_SESSION)));
 		statCollectionList.add(new SpeedDistributionTimePeriodStatCollector(60));
 		
-		statCollectionFeederList.add(new PeekTimeCalculationFeeder((ISurvayDataRetreiver)timePeriodMinuits60));
+		statCollectionFeederList.add(new PeekTimeCalculationFeeder((ISurveyDataRetreiver)timePeriodMinuits60));
 	}
 	
 	@Override
-	public List<ISurvayStatisticCollector> getStatCollectors() {
+	public List<ISurveyStatisticCollector> getStatCollectors() {
 		return statCollectionList;
 	}
 
 	@Override
-	public List<ISurvayStatisticFeeder> getStatFeeders() {
+	public List<ISurveyStatisticFeeder> getStatFeeders() {
 		return statCollectionFeederList;
 	}
 

@@ -1,6 +1,6 @@
 package com.challenge.survey.vehicle.model;
 
-public class SurvayData {
+public class SurveyData {
 	public static final int DIRECTION_UP = 0;
 	
 	public static final int DIRECTION_DOWN = 1;
@@ -11,7 +11,7 @@ public class SurvayData {
 	
 	private int direction;
 	
-	public SurvayData(long firstMark, long secondMark, int direction) {
+	public SurveyData(long firstMark, long secondMark, int direction) {
 		this.firstMark = firstMark;
 		this.secondMark = secondMark;
 		this.direction = direction;
@@ -43,6 +43,6 @@ public class SurvayData {
 
 	@Override
 	public String toString() {
-		return "SurvayData [firstMark=" + firstMark + ", secondMark=" + secondMark + ", direction=" + direction+ "]";
+		return "SurveyData [firstMark=" + firstMark + ", secondMark=" + secondMark + ", direction=" + direction+ "]";
 	}
 }

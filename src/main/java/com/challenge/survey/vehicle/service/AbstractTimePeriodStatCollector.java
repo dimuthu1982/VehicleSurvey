@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.challenge.survey.vehicle.collectors.ISurvayStatisticCollector;
-import com.challenge.survey.vehicle.model.SurvayData;
+import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
+import com.challenge.survey.vehicle.model.SurveyData;
 import com.challenge.survey.vehicle.model.TimeStatistics;
 import com.challenge.survey.vehicle.utils.DateUtils;
 
 
-public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics> implements ISurvayStatisticCollector, ISurvayDataRetreiver<T>{
+public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics> implements ISurveyStatisticCollector, ISurveyDataRetreiver<T>{
 
 	private List<T> statHolder =  new ArrayList<>();
 
@@ -24,7 +24,6 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics> 
 		sessions.forEach(seassion -> {
 			LocalTime startingSession = seassion.get(0);
 			LocalTime endingSession = seassion.get(1);
-//			TimeStatistics sdsd =  new TimeStatistics(startingSession, endingSession);
 			statHolder.add(getDataByDateRange(startingSession, endingSession));
 		});
 
@@ -53,7 +52,7 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics> 
 	}
 
 	@Override
-	public void collectStatistics(SurvayData statistics) {
+	public void collectStatistics(SurveyData statistics) {
 		LocalTime hitTime = DateUtils.plusMillisecond(LocalTime.of(00, 00),statistics.getSecondMark());
 		
 		statHolder.stream()
@@ -69,5 +68,5 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics> 
 
 	protected abstract <T extends TimeStatistics> T getDataByDateRange(LocalTime startTime, LocalTime endTime);
 	
-	protected abstract Consumer<T> updateStatics(SurvayData servayData);
+	protected abstract Consumer<T> updateStatics(SurveyData servayData);
 }

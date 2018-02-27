@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
 import com.challenge.survey.vehicle.model.SpeedCountingStatistics;
-import com.challenge.survey.vehicle.model.SurvayData;
+import com.challenge.survey.vehicle.model.SurveyData;
 import com.challenge.survey.vehicle.service.TimePeriodStatCollector;
 
 public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatCollector{
@@ -15,12 +15,12 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 	}
 
 	@Override
-	protected Consumer<CountingStatistics> updateStatics(SurvayData servayData){
+	protected Consumer<CountingStatistics> updateStatics(SurveyData servayData){
 		return super.updateStatics(servayData).andThen(stat -> {
 			
 			long travellingSpeed = calculateSpeed(servayData);
 			
-			if(servayData.getDirection() == SurvayData.DIRECTION_UP) {
+			if(servayData.getDirection() == SurveyData.DIRECTION_UP) {
 				((SpeedCountingStatistics)stat).addUpStreamSpeed(travellingSpeed);
 			}else {
 				((SpeedCountingStatistics)stat).addDownStreamSpeed(travellingSpeed);
@@ -30,7 +30,7 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 	}
 	
 	
-	private long calculateSpeed(SurvayData servayData) {
+	private long calculateSpeed(SurveyData servayData) {
 		long travellingTime = servayData.getSecondMark() - servayData.getFirstMark();
 		return Math.round((2.5*1000*60*60)/(travellingTime*1000));
 	}

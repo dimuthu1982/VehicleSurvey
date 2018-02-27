@@ -10,18 +10,22 @@ import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
 
 import com.challenge.survey.vehicle.builder.IStatCollectorBuilder;
-import com.challenge.survey.vehicle.builder.VehicleSurvayStatCollectorBuilder;
-import com.challenge.survey.vehicle.collectors.ISurvayStatisticCollector;
+import com.challenge.survey.vehicle.builder.VehicleSurveyStatCollectorBuilder;
+import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
-import com.challenge.survey.vehicle.service.ISurvayBook;
-import com.challenge.survey.vehicle.service.ISurvayFileReader;
-import com.challenge.survey.vehicle.service.SurvayBook;
-import com.challenge.survey.vehicle.service.VehicleSurvayFileReader;
-import com.challenge.survey.vehicle.service.VehicleSurvayStatCollectIterator;
+import com.challenge.survey.vehicle.service.ISurveyBook;
+import com.challenge.survey.vehicle.service.ISurveyFileReader;
+import com.challenge.survey.vehicle.service.SurveyBook;
+import com.challenge.survey.vehicle.service.VehicleSurveyStatCollectIterator;
+import com.challenge.survey.vehicle.service.VehicleSurveyFileReader;
 
 
 /**
  * Hello world!
+ * Future enhancement
+ * replace sysout with logger 
+ * use DI
+ * Catch and print proper exceptions 
  *
  */
 public class App 
@@ -29,21 +33,19 @@ public class App
 	public static void main( String[] args ) throws URISyntaxException, FileReaderSrviceException{
 		Path path = getFilePath();
 
-		System.out.println("Start Reading Survay");
-		ISurvayFileReader survayFileReader = new VehicleSurvayFileReader(path);
-
-		IStatCollectorBuilder statCollectorBuilder = new VehicleSurvayStatCollectorBuilder().build();
-
-		ISurvayStatisticCollector survayStatCollectorIterator = new VehicleSurvayStatCollectIterator(statCollectorBuilder);
-
-		ISurvayBook survayBook = new SurvayBook(survayFileReader, survayStatCollectorIterator);
-		survayBook.startSurvay();
-
-		System.out.println("End Reading Survay");
+		System.out.println("Starting statistic display");
 		
-//		System.out.println("KM/H: " + Math.round((2.5*1000*60*60)/(145*1000)));
+		ISurveyFileReader surveyFileReader = new VehicleSurveyFileReader(path);
 
-		//    	 printData(path); 
+		IStatCollectorBuilder statCollectorBuilder = new VehicleSurveyStatCollectorBuilder().build();
+
+		ISurveyStatisticCollector surveyStatCollectorIterator = new VehicleSurveyStatCollectIterator(statCollectorBuilder);
+
+		ISurveyBook surveyBook = new SurveyBook(surveyFileReader, surveyStatCollectorIterator);
+		surveyBook.startSurvey();
+
+		System.out.println("Ending statistic display");
+		
 	}
 
 	private static Path getFilePath() throws URISyntaxException {

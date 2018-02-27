@@ -6,16 +6,16 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
-import com.challenge.survey.vehicle.model.SurvayData;
+import com.challenge.survey.vehicle.model.SurveyData;
 
 
 public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<CountingStatistics>{
 
 	private String periodTypeMessage;
 	
-	public TimePeriodStatCollector(long minuits) {
-		super(minuits);
-		periodTypeMessage = String.format("Displaying statistics every %d minuits", minuits);
+	public TimePeriodStatCollector(long minutes) {
+		super(minutes);
+		periodTypeMessage = String.format("Displaying statistics every %d minutes", minutes);
 	}
 
 	public TimePeriodStatCollector(List<List<LocalTime>> sessions) {
@@ -27,9 +27,9 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 		periodTypeMessage = "Displaying statistics sessions: " + seassions;
 	}
 
-	protected Consumer<CountingStatistics> updateStatics(SurvayData servayData) {
+	protected Consumer<CountingStatistics> updateStatics(SurveyData servayData) {
 		return stat -> {
-			if(servayData.getDirection() == SurvayData.DIRECTION_UP) {
+			if(servayData.getDirection() == SurveyData.DIRECTION_UP) {
 				stat.incrementUpStream();
 			}else {
 				stat.incrementDownStream();

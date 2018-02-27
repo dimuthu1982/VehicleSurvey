@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
 
-public class SurvayFileReader implements AutoCloseable{
+public class SurveyFileReader implements AutoCloseable{
 
 	private Path filePath;
 	
@@ -21,12 +21,12 @@ public class SurvayFileReader implements AutoCloseable{
 
 	public static final String DELIMETER = ":";
 
-	public SurvayFileReader(Path filePath) throws FileReaderSrviceException{
+	public SurveyFileReader(Path filePath) throws FileReaderSrviceException{
 		this.filePath = filePath;
 		open();
 	}
 
-	private SurvayFileReader open() throws FileReaderSrviceException {
+	private SurveyFileReader open() throws FileReaderSrviceException {
 		try {
 			File file = new File(filePath.toUri());
 

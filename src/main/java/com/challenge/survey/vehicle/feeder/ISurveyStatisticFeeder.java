@@ -1,6 +1,6 @@
 package com.challenge.survey.vehicle.feeder;
 
-public interface ISurvayStatisticFeeder {
+public interface ISurveyStatisticFeeder {
 	
 	public void executeStatisticFeeders();
 	
