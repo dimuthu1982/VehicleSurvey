@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 public class DateUtils {
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-	
+
 	public static String formatTime(LocalTime localTime) {
 		return localTime.format(formatter);
 	}
@@ -23,7 +23,7 @@ public class DateUtils {
 	public static LocalTime plusMillisecond(LocalTime time) {
 		return time.plus(1, ChronoUnit.MILLIS);
 	}
-	
+
 	public static LocalTime minusMillisecond(LocalTime time) {
 		return time.minus(1, ChronoUnit.MILLIS);
 	}

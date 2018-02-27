@@ -30,29 +30,31 @@ public class VehicleSurveyFileReader extends AbstractSurveyFileReader implements
 
 		String[] rawDataLines = rawData.split(SurveyFileReader.DELIMETER);
 
-		if(rawDataLines.length == 2) {
+		if (rawDataLines.length == 2) {
 			return getSurveyData(rawDataLines[0], rawDataLines[1], SurveyData.DIRECTION_UP);
 
-		}else if(rawDataLines.length == 4) {
+		} else if (rawDataLines.length == 4) {
 			return getSurveyData(rawDataLines[0], rawDataLines[2], SurveyData.DIRECTION_DOWN);
 		}
 		throw new FileReaderSrviceException("Unable to transform data:" + rawData);
 	}
 
 	@Override
-	protected String readRawData(SurveyFileReader fileReader) throws UnrecognizedFileContentException, FileReaderSrviceException {
-		
+	protected String readRawData(SurveyFileReader fileReader)
+			throws UnrecognizedFileContentException, FileReaderSrviceException {
+
 		String dataLine1 = fileReader.readLines(2);
-		
-		if(upStreamMatch.matcher(dataLine1).find()) {
+
+		if (upStreamMatch.matcher(dataLine1).find()) {
 			return dataLine1;
 		}
 
 		String dataLine2 = fileReader.readLines(2);
 		String dataLine = dataLine1.concat(SurveyFileReader.DELIMETER).concat(dataLine2);
-		if(downStreamMatch.matcher(dataLine).find()) {
+		if (downStreamMatch.matcher(dataLine).find()) {
 			return dataLine;
 		}
-		throw new UnrecognizedFileContentException(String.format("Unrecognized Data Format [%s and %s] ", dataLine1, dataLine2));
+		throw new UnrecognizedFileContentException(
+				String.format("Unrecognized Data Format [%s and %s] ", dataLine1, dataLine2));
 	}
 }

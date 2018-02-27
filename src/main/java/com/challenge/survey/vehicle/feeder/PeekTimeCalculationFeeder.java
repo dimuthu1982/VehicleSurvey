@@ -30,43 +30,47 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 		findPeekTimeSlots(DOWN_STREAM);
 	}
 
-
 	@Override
 	public void printStatisticFeeders() {
 
-		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------");
-		if(peekTimesUpStream != null) {
-			
-			System.out.println("Up stream counts : " + peekTimesUpStream.get(0).getUpStreamCount());
-			peekTimesUpStream.forEach(stat -> System.out.println(String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
-		}else {
-			System.out.println("No Data Found for up stream");
-		}
-		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (Upstream Peek Times)-------------------\n");
+		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()
+				+ " (Upstream Peek Times)-------------------");
+		if (peekTimesUpStream != null) {
 
-		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------");
-		if(peekTimesDownStream != null) {
-			System.out.println("Down stream counts : " + peekTimesDownStream.get(0).getDownStreamCount());
-			peekTimesDownStream.forEach(stat -> System.out.println(String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
-		}else {
+			System.out.println("Up stream counts : " + peekTimesUpStream.get(0).getUpStreamCount());
+			peekTimesUpStream.forEach(stat -> System.out.println(
+					String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
+		} else {
 			System.out.println("No Data Found for up stream");
 		}
-		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes() + " (DownStream Peek Times)-------------------\n");
+		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes()
+				+ " (Upstream Peek Times)-------------------\n");
+
+		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()
+				+ " (DownStream Peek Times)-------------------");
+		if (peekTimesDownStream != null) {
+			System.out.println("Down stream counts : " + peekTimesDownStream.get(0).getDownStreamCount());
+			peekTimesDownStream.forEach(stat -> System.out.println(
+					String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
+		} else {
+			System.out.println("No Data Found for up stream");
+		}
+		System.out.println("------------------- " + surveyStatisticDataCollection.getStatisticTypes()
+				+ " (DownStream Peek Times)-------------------\n");
 	}
 
 	private void findPeekTimeSlots(int upStream) {
 		Comparator<CountingStatistics> comparatorStream;
 
-		if(upStream == UP_STREAM) {
+		if (upStream == UP_STREAM) {
 
 			comparatorStream = Comparator.comparing(CountingStatistics::getUpStreamCount);
 			List<CountingStatistics> sortedStatList = getValidDataByStream(comparatorStream);
 			int peekTimeCount = sortedStatList.get(0).getUpStreamCount();
-			peekTimesUpStream = sortedStatList.stream()
-					.filter(stat -> stat.getUpStreamCount() == peekTimeCount)
+			peekTimesUpStream = sortedStatList.stream().filter(stat -> stat.getUpStreamCount() == peekTimeCount)
 					.collect(Collectors.toList());
 
-		}else {
+		} else {
 			comparatorStream = Comparator.comparing(CountingStatistics::getDownStreamCount);
 			List<CountingStatistics> sortedStatList = getValidDataByStream(comparatorStream);
 			int peekTimeCount = sortedStatList.get(0).getDownStreamCount();
@@ -76,11 +80,8 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 		}
 	}
 
-	private List<CountingStatistics> getValidDataByStream(Comparator<CountingStatistics> comparatorField){
-		return surveyStatisticDataCollection.getStatistics()
-				.stream()
-				.filter(CountingStatistics::isStatistic)
-				.sorted(comparatorField.reversed())
-				.collect(Collectors.toList());
+	private List<CountingStatistics> getValidDataByStream(Comparator<CountingStatistics> comparatorField) {
+		return surveyStatisticDataCollection.getStatistics().stream().filter(CountingStatistics::isStatistic)
+				.sorted(comparatorField.reversed()).collect(Collectors.toList());
 	}
 }

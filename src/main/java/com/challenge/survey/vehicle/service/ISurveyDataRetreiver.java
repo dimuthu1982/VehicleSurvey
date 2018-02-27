@@ -7,6 +7,6 @@ import com.challenge.survey.vehicle.model.TimeStatistics;
 public interface ISurveyDataRetreiver<T extends TimeStatistics> {
 
 	public List<T> getStatistics();
-	
+
 	public String getStatisticTypes();
 }

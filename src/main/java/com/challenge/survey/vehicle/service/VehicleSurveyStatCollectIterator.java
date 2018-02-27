@@ -5,10 +5,10 @@ import com.challenge.survey.vehicle.collectors.ISurveyStatisticCollector;
 import com.challenge.survey.vehicle.feeder.ISurveyStatisticFeeder;
 import com.challenge.survey.vehicle.model.SurveyData;
 
-public class VehicleSurveyStatCollectIterator implements ISurveyStatisticCollector, ISurveyStatisticFeeder{
+public class VehicleSurveyStatCollectIterator implements ISurveyStatisticCollector, ISurveyStatisticFeeder {
 
 	private IStatCollectorBuilder statCollectorBuilder;
-	
+
 	public VehicleSurveyStatCollectIterator(IStatCollectorBuilder statCollectorBuilder) {
 		this.statCollectorBuilder = statCollectorBuilder;
 	}

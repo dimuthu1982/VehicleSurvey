@@ -11,17 +11,17 @@ import java.util.Scanner;
 
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
 
-public class SurveyFileReader implements AutoCloseable{
+public class SurveyFileReader implements AutoCloseable {
 
 	private Path filePath;
-	
+
 	private FileInputStream inputStream = null;
-	
+
 	private Scanner scanner = null;
 
 	public static final String DELIMETER = ":";
 
-	public SurveyFileReader(Path filePath) throws FileReaderSrviceException{
+	public SurveyFileReader(Path filePath) throws FileReaderSrviceException {
 		this.filePath = filePath;
 		open();
 	}
@@ -35,7 +35,7 @@ public class SurveyFileReader implements AutoCloseable{
 
 			return this;
 		} catch (FileNotFoundException e) {
-			throw new FileReaderSrviceException("Error in reading file : " + filePath.toUri(),e);
+			throw new FileReaderSrviceException("Error in reading file : " + filePath.toUri(), e);
 		}
 	}
 
@@ -44,11 +44,11 @@ public class SurveyFileReader implements AutoCloseable{
 	}
 
 	public String readLines(int numberOflines) throws FileReaderSrviceException {
-		return readLines(numberOflines,DELIMETER);
+		return readLines(numberOflines, DELIMETER);
 	}
 
 	public String readLines(int numberOflines, String delimeter) throws FileReaderSrviceException {
-		return String.format("%s%s%S", readLine(),delimeter,readLine());
+		return String.format("%s%s%S", readLine(), delimeter, readLine());
 	}
 
 	private String readLine() throws FileReaderSrviceException {
@@ -67,6 +67,8 @@ public class SurveyFileReader implements AutoCloseable{
 			}
 		});
 
-		Optional.of(scanner).ifPresent(fr -> {fr.close();});
+		Optional.of(scanner).ifPresent(fr -> {
+			fr.close();
+		});
 	}
 }

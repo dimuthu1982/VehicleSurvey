@@ -11,7 +11,7 @@ public class CountingStatistics extends TimeStatistics {
 	public CountingStatistics(LocalTime startTime, LocalTime endTime) {
 		super(startTime, endTime);
 	}
-	
+
 	public int getUpStreamCount() {
 		return upStreamCount;
 	}
@@ -42,6 +42,7 @@ public class CountingStatistics extends TimeStatistics {
 
 	@Override
 	public String toString() {
-		return String.format("%s : Statistics: [Upstream Count: %d, Downstream Count: %d]", super.toString(), upStreamCount,downStreamCount);
+		return String.format("%s : Statistics: [Upstream Count: %d, Downstream Count: %d]", super.toString(),
+				upStreamCount, downStreamCount);
 	}
 }

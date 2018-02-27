@@ -4,12 +4,12 @@ import java.time.LocalTime;
 
 import com.challenge.survey.vehicle.utils.DateUtils;
 
-public class TimeStatistics{
+public class TimeStatistics {
 
 	private LocalTime startTime;
-	
+
 	private LocalTime endTime;
-	
+
 	public TimeStatistics(LocalTime startTime, LocalTime endTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -33,10 +33,9 @@ public class TimeStatistics{
 
 	@Override
 	public String toString() {
-//		return "Time Frame [" + startTime + " - " + DateUtils.formatTime(endTime) + "] ";
 		return formatTimeStatistics();
 	}
-	
+
 	protected final String formatTimeStatistics() {
 		return String.format("Time Frame [%s - %s] ", startTime, DateUtils.formatTime(endTime));
 	}
