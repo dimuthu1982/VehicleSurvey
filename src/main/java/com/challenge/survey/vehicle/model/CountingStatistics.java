@@ -19,6 +19,10 @@ public class CountingStatistics extends TimeStatistics {
 	public void setUpStreamCount(int upStreamCount) {
 		this.upStreamCount = upStreamCount;
 	}
+	
+	public void setDownStreamCount(int downStreamCount) {
+		this.downStreamCount = downStreamCount;
+	}
 
 	public int getDownStreamCount() {
 		return downStreamCount;

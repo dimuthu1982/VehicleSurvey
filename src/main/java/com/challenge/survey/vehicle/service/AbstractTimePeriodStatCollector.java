@@ -11,8 +11,7 @@ import com.challenge.survey.vehicle.model.TimeStatistics;
 import com.challenge.survey.vehicle.settings.SurveySessions;
 import com.challenge.survey.vehicle.utils.DateUtils;
 
-public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
-		implements ISurveyStatisticCollector, ISurveyDataRetreiver<T> {
+public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>implements ISurveyStatisticCollector, ISurveyDataRetreiver<T> {
 
 	private List<T> statHolder = new ArrayList<>();
 
@@ -41,13 +40,13 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
 			startTime = DateUtils.plusMillisecond(endTime);
 			endTime = DateUtils.getLocalTimeUpperBound(startTime, timeGapInMinuits);
 
-			statHolder.add(getDataByDateRange(startTime, endTime));
+			statHolder.add(getDataByDateRange(startTime, DateUtils.truncatedToSeconds(endTime)));
 
 		} while (endTime.isBefore(dayEnds));
 
 		endTime = DateUtils.minusMillisecond(LocalTime.of(00, 00));
 
-		statHolder.add(getDataByDateRange(startTime, endTime));
+		statHolder.add(getDataByDateRange(startTime, DateUtils.truncatedToSeconds(endTime)));
 	}
 
 	@Override

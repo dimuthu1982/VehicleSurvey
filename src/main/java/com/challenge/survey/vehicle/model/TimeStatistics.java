@@ -37,6 +37,7 @@ public class TimeStatistics {
 	}
 
 	protected final String formatTimeStatistics() {
-		return String.format("Time Frame [%s - %s] ", startTime, DateUtils.formatTime(endTime));
+//		return String.format("Time Frame [%s - %s] ", startTime, DateUtils.formatTime(endTime));
+		return String.format("Time Frame [%s - %s] ", startTime, endTime);
 	}
 }

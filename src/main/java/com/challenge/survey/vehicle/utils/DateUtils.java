@@ -35,4 +35,10 @@ public class DateUtils {
 	public static boolean isLocalDateBetween(LocalTime localDate1, LocalTime localDate2, LocalTime pivotDate) {
 		return localDate1.isBefore(pivotDate) && localDate2.isAfter(pivotDate);
 	}
+	
+	public static LocalTime truncatedToSeconds(LocalTime time) {
+		return time.truncatedTo(ChronoUnit.SECONDS);
+	}
+	
+	
 }
