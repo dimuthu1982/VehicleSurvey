@@ -20,16 +20,6 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>
 		timePeriodOrganizer(minuits);
 	}
 
-	/*public AbstractTimePeriodStatCollector(List<List<LocalTime>> sessions) {
-
-		sessions.forEach(seassion -> {
-			LocalTime startingSession = seassion.get(0);
-			LocalTime endingSession = seassion.get(1);
-			statHolder.add(getDataByDateRange(startingSession, endingSession));
-		});
-
-	}*/
-
 	public AbstractTimePeriodStatCollector(List<SurveySessions> sessions) {
 		sessions.forEach(seassion -> {
 			LocalTime startingSession = seassion.getStartTime();

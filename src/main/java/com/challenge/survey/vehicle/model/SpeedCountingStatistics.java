@@ -34,17 +34,19 @@ public class SpeedCountingStatistics extends CountingStatistics {
 		String message = "";
 
 		if (upStreamSpeed > 0) {
-			message = String.format("Upstream speed: %d KM/H, Total vehicles traveld: %d, Time Period: %s",
-					calculateUpStreamAverage(), super.getUpStreamCount(), formatTimeStatistics());
+			message = String.format("%s : Statistics: [Upstream AVG Speed: %d km/h, Total Vehicles Traveled: %d]",formatTimeStatistics(),
+					calculateUpStreamAverage(), super.getUpStreamCount());
 		}
 
 		if (downStreamSpeed > 0) {
-			message = message.concat("\n")
-					.concat(String.format("Downstream speed: %d, Total vehicles traveld: %d, Time Period: %s",
-							calculatDownStreamAverage(), super.getDownStreamCount(), formatTimeStatistics()));
+			if(!message.isEmpty()) {
+				message = message.concat("\n");
+			}
+
+			message = message.concat(String.format("%s : Statistics: [Downstream AVG Speed: %d km/h, Total Vehicles Traveled: %d]",formatTimeStatistics(),
+					calculatDownStreamAverage(), super.getDownStreamCount()));
 		}
 
 		return message;
 	}
-
 }

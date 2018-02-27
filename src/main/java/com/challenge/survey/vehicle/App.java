@@ -34,8 +34,7 @@ public class App {
 
 		IStatCollectorBuilder statCollectorBuilder = new VehicleSurveyStatCollectorBuilder().build();
 
-		ISurveyStatisticCollector surveyStatCollectorIterator = new VehicleSurveyStatCollectIterator(
-				statCollectorBuilder);
+		ISurveyStatisticCollector surveyStatCollectorIterator = new VehicleSurveyStatCollectIterator(statCollectorBuilder);
 
 		ISurveyBook surveyBook = new SurveyBook(surveyFileReader, surveyStatCollectorIterator);
 		surveyBook.startSurvey();

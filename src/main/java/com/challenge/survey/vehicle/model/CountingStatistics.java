@@ -42,7 +42,6 @@ public class CountingStatistics extends TimeStatistics {
 
 	@Override
 	public String toString() {
-		return String.format("%s : Statistics: [Upstream Count: %d, Downstream Count: %d]", super.toString(),
-				upStreamCount, downStreamCount);
+		return String.format("%s : Statistics: [Upstream Count: %d, Downstream Count: %d]", super.toString(),upStreamCount, downStreamCount);
 	}
 }

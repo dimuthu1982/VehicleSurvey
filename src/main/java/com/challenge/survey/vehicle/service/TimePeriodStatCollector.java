@@ -18,14 +18,6 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 		periodTypeMessage = String.format("Displaying statistics every %d minutes", minutes);
 	}
 
-	/*public TimePeriodStatCollector(List<List<LocalTime>> sessions) {
-		super(sessions);
-		String seassions = sessions.stream().map(season -> String.format("[%s - %s]", season.get(0), season.get(1)))
-				.collect(Collectors.joining(", "));
-
-		periodTypeMessage = "Displaying statistics sessions: " + seassions;
-	}*/
-
 	public TimePeriodStatCollector(List<SurveySessions> sessions) {
 		super(sessions);
 		
@@ -50,11 +42,10 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 		List<CountingStatistics>  filteredStatistics = getStatistics().stream().filter(CountingStatistics::isStatistic).collect(Collectors.<CountingStatistics>toList()); 
 		
 		if(filteredStatistics.isEmpty()) {
-			System.out.println("No statistics  found.");
+			System.out.println("No Statistics Found.");
 		}else {
 			filteredStatistics.forEach(System.out::println);
 		}
-//		System.out.println("------------------- " + periodTypeMessage + " -------------------\n");
 	}
 
 	@Override

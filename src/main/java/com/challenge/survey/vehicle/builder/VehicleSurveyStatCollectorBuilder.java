@@ -11,7 +11,6 @@ import com.challenge.survey.vehicle.feeder.PeekTimeCalculationFeeder;
 import com.challenge.survey.vehicle.service.ISurveyDataRetreiver;
 import com.challenge.survey.vehicle.service.TimePeriodStatCollector;
 import com.challenge.survey.vehicle.settings.SurveySessions;
-import com.challenge.survey.vehicle.settings.VehileServiceConstants;
 
 public class VehicleSurveyStatCollectorBuilder implements IStatCollectorBuilder {
 
@@ -30,7 +29,6 @@ public class VehicleSurveyStatCollectorBuilder implements IStatCollectorBuilder 
 		
 		statCollectionList.add(new TimePeriodStatCollector(Arrays.asList(SurveySessions.MORNING_SESSION, SurveySessions.EVENING_SESSION)));
 		
-//		statCollectionList.add(new TimePeriodStatCollector(Arrays.asList(VehileServiceConstants.MORNING_SESSION, VehileServiceConstants.EVENING_SESSION)));
 		statCollectionList.add(new SpeedDistributionTimePeriodStatCollector(60));
 
 		statCollectionFeederList.add(new PeekTimeCalculationFeeder((ISurveyDataRetreiver) timePeriodMinuits60));

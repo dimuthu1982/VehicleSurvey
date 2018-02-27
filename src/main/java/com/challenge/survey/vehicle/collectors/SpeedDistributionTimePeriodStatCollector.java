@@ -1,12 +1,15 @@
 package com.challenge.survey.vehicle.collectors;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
 import com.challenge.survey.vehicle.model.SpeedCountingStatistics;
 import com.challenge.survey.vehicle.model.SurveyData;
 import com.challenge.survey.vehicle.service.TimePeriodStatCollector;
+import com.challenge.survey.vehicle.utils.SurveyUtils;
 
 public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatCollector {
 
@@ -31,18 +34,22 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 
 	private long calculateSpeed(SurveyData servayData) {
 		long travellingTime = servayData.getSecondMark() - servayData.getFirstMark();
-		return Math.round((2.5 * 1000 * 60 * 60) / (travellingTime * 1000));
+		return SurveyUtils.calculateSpeedKMPH(travellingTime);
 	}
 
 	@Override
 	public void printStatistics() {
 		System.out.println("\n------------------- Speed Calculation -------------------");
-		getStatistics().stream().filter(CountingStatistics::isStatistic).forEach(System.out::println);
-		System.out.println("------------------- Speed Calculation -------------------\n");
+		List<CountingStatistics> statiisticList = getStatistics().stream().filter(CountingStatistics::isStatistic).collect(Collectors.<CountingStatistics>toList());
+		if(statiisticList.isEmpty()) {
+			System.out.println("No Statistics Found.");
+		}else {
+			statiisticList.forEach(System.out::println);
+		}
 	}
 
 	@Override
-	protected CountingStatistics getDataByDateRange(LocalTime startTime, LocalTime endTime) {
+	protected SpeedCountingStatistics getDataByDateRange(LocalTime startTime, LocalTime endTime) {
 		return new SpeedCountingStatistics(startTime, endTime);
 	}
 
