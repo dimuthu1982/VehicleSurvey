@@ -2,8 +2,6 @@ package com.challenge.survey.vehicle.model;
 
 import java.time.LocalTime;
 
-import com.challenge.survey.vehicle.utils.DateUtils;
-
 public class TimeStatistics {
 
 	private LocalTime startTime;
@@ -37,7 +35,6 @@ public class TimeStatistics {
 	}
 
 	protected final String formatTimeStatistics() {
-//		return String.format("Time Frame [%s - %s] ", startTime, DateUtils.formatTime(endTime));
 		return String.format("Time Frame [%s - %s] ", startTime, endTime);
 	}
 }

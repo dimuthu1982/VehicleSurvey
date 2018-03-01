@@ -40,13 +40,13 @@ public abstract class AbstractTimePeriodStatCollector<T extends TimeStatistics>i
 			startTime = DateUtils.plusMillisecond(endTime);
 			endTime = DateUtils.getLocalTimeUpperBound(startTime, timeGapInMinuits);
 
-			statHolder.add(getDataByDateRange(startTime, DateUtils.truncatedToSeconds(endTime)));
+			statHolder.add(getDataByDateRange(startTime, endTime));
 
 		} while (endTime.isBefore(dayEnds));
 
 		endTime = DateUtils.minusMillisecond(LocalTime.of(00, 00));
 
-		statHolder.add(getDataByDateRange(startTime, DateUtils.truncatedToSeconds(endTime)));
+		statHolder.add(getDataByDateRange(startTime, endTime));
 	}
 
 	@Override

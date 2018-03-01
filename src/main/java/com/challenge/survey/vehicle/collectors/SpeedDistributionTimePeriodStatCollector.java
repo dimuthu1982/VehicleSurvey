@@ -40,7 +40,7 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 	@Override
 	public void printStatistics() {
 		System.out.println("\n------------------- Speed Calculation -------------------");
-		List<CountingStatistics> statiisticList = getStatistics().stream().filter(CountingStatistics::isStatistic).collect(Collectors.<CountingStatistics>toList());
+		List<CountingStatistics> statiisticList = getStatistics().stream().filter(this::isSpeedCount).collect(Collectors.<CountingStatistics>toList());
 		if(statiisticList.isEmpty()) {
 			System.out.println("No Statistics Found.");
 		}else {
@@ -51,6 +51,10 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 	@Override
 	protected SpeedCountingStatistics getDataByDateRange(LocalTime startTime, LocalTime endTime) {
 		return new SpeedCountingStatistics(startTime, endTime);
+	}
+	
+	private boolean isSpeedCount(CountingStatistics stat) {
+		return ((SpeedCountingStatistics)stat).isSpeedCount();
 	}
 
 }

@@ -43,8 +43,23 @@ public class TimePeriodStatCollectorTest {
 	@Parameters
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] { 
+			//10:22:35.562 - 10:22:59.698
 			{getSurveyData(37355562L,37379698L,SurveyData.DIRECTION_UP),getCollectorList(),
-				Arrays.asList(getResultList(LocalTime.of(10, 00),LocalTime.of(10, 59),1,0), getResultList(LocalTime.of(10, 00),LocalTime.of(10, 29),1,0), getResultList(LocalTime.of(10, 20),LocalTime.of(10, 39),1,0), getResultList(LocalTime.of(10, 15),LocalTime.of(10, 29),1,0))} //10:22:35.562 - 10:22:59.698
+				Arrays.asList(getResultList(LocalTime.of(10, 00),LocalTime.of(10, 59),1,0), getResultList(LocalTime.of(10, 00),LocalTime.of(10, 29),1,0), getResultList(LocalTime.of(10, 20),LocalTime.of(10, 39),1,0), getResultList(LocalTime.of(10, 15),LocalTime.of(10, 29),1,0))},
+			
+			//16:59:50.651 - 16:59:54.509
+			{getSurveyData(61190651L,61194509L,SurveyData.DIRECTION_UP),getCollectorList(),
+				Arrays.asList(getResultList(LocalTime.of(16, 00),LocalTime.of(16, 59),1,0), getResultList(LocalTime.of(16, 30),LocalTime.of(16, 59),1,0), getResultList(LocalTime.of(16, 40),LocalTime.of(16, 59),1,0), getResultList(LocalTime.of(16, 45),LocalTime.of(16, 59),1,0))}, 
+			
+			//17:06:28.875 - 17:06:29.026
+			{getSurveyData(61588875L,61589026L,SurveyData.DIRECTION_DOWN),getCollectorList(),
+					Arrays.asList(getResultList(LocalTime.of(17, 00),LocalTime.of(17, 59),0,1), getResultList(LocalTime.of(17, 00),LocalTime.of(17, 29),0,1), getResultList(LocalTime.of(17, 20),LocalTime.of(17, 39),0,1), getResultList(LocalTime.of(17, 15),LocalTime.of(17, 29),0,1))},
+			
+			//19:42:06.077 - 19:42:10.205
+			{getSurveyData(70926077L,70930205L,SurveyData.DIRECTION_DOWN),getCollectorList(),
+					Arrays.asList(getResultList(LocalTime.of(19, 00),LocalTime.of(19, 59),0,1), getResultList(LocalTime.of(19, 30),LocalTime.of(19, 59),0,1), getResultList(LocalTime.of(19, 40),LocalTime.of(19, 59),0,1), getResultList(LocalTime.of(19, 30),LocalTime.of(19, 44),0,1))},
+			
+		
 		});
 	}
 
@@ -64,7 +79,7 @@ public class TimePeriodStatCollectorTest {
 	}
 	
 	private static CountingStatistics getResultList(LocalTime startTime, LocalTime endTime, int upCount,int downCount) {
-		CountingStatistics stat = new CountingStatistics(startTime,endTime.plus(59, ChronoUnit.SECONDS));
+		CountingStatistics stat = new CountingStatistics(startTime,endTime.plus(59, ChronoUnit.SECONDS).plus(999, ChronoUnit.MILLIS));
 		stat.setUpStreamCount(upCount);
 		stat.setDownStreamCount(downCount);
 		

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.challenge.survey.vehicle.model.CountingStatistics;
 import com.challenge.survey.vehicle.service.ISurveyDataRetreiver;
-import com.challenge.survey.vehicle.utils.DateUtils;
 
 public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 
@@ -29,30 +28,28 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 
 	@Override
 	public void printStatisticFeeders() {
-
+		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()+ " (Peek Times)-------------------");
 		printUpStreamData();
 		printDownStreamData();
 	}
 
-	//TODO: To be formatted
 	private void printDownStreamData() {
-		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()+ " (DownStream Peek Times)-------------------");
 		
 		if (peekTimesDownStream != null) {
-			System.out.println("Down stream counts : " + peekTimesDownStream.get(0).getDownStreamCount());
-			peekTimesDownStream.forEach(stat -> System.out.println(String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
+			long vehiclesCount = peekTimesDownStream.get(0).getDownStreamCount();
+			peekTimesDownStream.forEach(stat -> System.out.println(String.format("Time Frame : [%s - %s] : Statistics: [Total Vehicles Travelled Down Stream: %d]", stat.getStartTime(),stat.getEndTime(), vehiclesCount)));
 		} else {
-			System.out.println("No Data Found for up stream");
+			System.out.println("No Data Found for down stream");
 		}
 	}
 
 	private void printUpStreamData() {
-		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()+ " (Upstream Peek Times)-------------------");
-		if (peekTimesUpStream != null) {
+		if (peekTimesUpStream != null || !peekTimesUpStream.isEmpty()) {
 
-			System.out.println("Up stream counts : " + peekTimesUpStream.get(0).getUpStreamCount());
+			long vehiclesCount = peekTimesUpStream.get(0).getUpStreamCount();
+			
 			peekTimesUpStream.forEach(stat -> System.out.println(
-					String.format("Period: [%s - %s]", stat.getStartTime(), DateUtils.formatTime(stat.getEndTime()))));
+					String.format("Time Frame : [%s - %s] : Statistics: [Total Vehicles Travelled Up Stream: %d]", stat.getStartTime(), stat.getEndTime(), vehiclesCount)));
 		} else {
 			System.out.println("No Data Found for up stream");
 		}

@@ -49,4 +49,8 @@ public class SpeedCountingStatistics extends CountingStatistics {
 
 		return message;
 	}
+	
+	public boolean isSpeedCount() {
+		return (upStreamSpeed > 0 || downStreamSpeed > 0);
+	}
 }

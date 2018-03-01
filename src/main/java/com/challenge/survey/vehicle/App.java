@@ -19,11 +19,6 @@ import com.challenge.survey.vehicle.service.SurveyBook;
 import com.challenge.survey.vehicle.service.VehicleSurveyStatCollectIterator;
 import com.challenge.survey.vehicle.service.VehicleSurveyFileReader;
 
-/**
- * Hello world! Future enhancement replace sysout with logger use DI Catch and
- * print proper exceptions
- *
- */
 public class App {
 	public static void main(String[] args) throws URISyntaxException, FileReaderSrviceException {
 		Path path = getFilePath();
@@ -44,8 +39,7 @@ public class App {
 	}
 
 	private static Path getFilePath() throws URISyntaxException {
-		// return Paths.get(App.class.getClassLoader().getResource("Vehicle Survey
-		// Coding Challenge sample data.txt").toURI());
+//		 return Paths.get(App.class.getClassLoader().getResource("Vehicle Survey Coding Challenge sample data.txt").toURI());
 		return Paths.get(App.class.getClassLoader().getResource("testSurvay.txt").toURI());
 	}
 

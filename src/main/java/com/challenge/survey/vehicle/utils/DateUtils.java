@@ -36,9 +36,11 @@ public class DateUtils {
 		return localDate1.isBefore(pivotDate) && localDate2.isAfter(pivotDate);
 	}
 	
-	public static LocalTime truncatedToSeconds(LocalTime time) {
+	/*public static LocalTime truncatedToSeconds(LocalTime time) {
+		System.out.println("truncatedToSeconds 1: " + time);
+		System.out.println("truncatedToSeconds 2: " + time.truncatedTo(ChronoUnit.SECONDS));
 		return time.truncatedTo(ChronoUnit.SECONDS);
-	}
+	}*/
 	
 	
 }
