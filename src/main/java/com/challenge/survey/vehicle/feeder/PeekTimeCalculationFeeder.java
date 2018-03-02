@@ -28,7 +28,7 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 
 	@Override
 	public void printStatisticFeeders() {
-		System.out.println("\n------------------- " + surveyStatisticDataCollection.getStatisticTypes()+ " (Peek Times)-------------------");
+		System.out.println("\n------------------------ " + surveyStatisticDataCollection.getStatisticTypes()+ " (Peek Times)------------------------");
 		printUpStreamData();
 		printDownStreamData();
 	}

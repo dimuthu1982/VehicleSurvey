@@ -39,7 +39,7 @@ public class SpeedDistributionTimePeriodStatCollector extends TimePeriodStatColl
 
 	@Override
 	public void printStatistics() {
-		System.out.println("\n------------------- Speed Calculation -------------------");
+		System.out.println("\n------------------------ Speed Calculation ------------------------");
 		List<CountingStatistics> statiisticList = getStatistics().stream().filter(this::isSpeedCount).collect(Collectors.<CountingStatistics>toList());
 		if(statiisticList.isEmpty()) {
 			System.out.println("No Statistics Found.");

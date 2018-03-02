@@ -52,9 +52,7 @@ public class SurveyFileReader implements AutoCloseable {
 	}
 
 	private String readLine() throws FileReaderSrviceException {
-		return Optional.of(scanner.nextLine()).filter(Objects::nonNull).map(line -> {
-			return line;
-		}).orElse(null);
+		return Optional.of(scanner.nextLine()).filter(Objects::nonNull).orElse(null);
 	}
 
 	@Override

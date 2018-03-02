@@ -19,7 +19,7 @@ import com.challenge.survey.vehicle.service.SurveyBook;
 import com.challenge.survey.vehicle.service.VehicleSurveyStatCollectIterator;
 import com.challenge.survey.vehicle.service.VehicleSurveyFileReader;
 
-public class App {
+public class SurveyApplication {
 	public static void main(String[] args) throws URISyntaxException, FileReaderSrviceException {
 		Path path = getFilePath();
 
@@ -34,13 +34,12 @@ public class App {
 		ISurveyBook surveyBook = new SurveyBook(surveyFileReader, surveyStatCollectorIterator);
 		surveyBook.startSurvey();
 
-		System.out.println("Ending statistic display");
+		System.out.println("\nEnding statistic display");
 
 	}
 
 	private static Path getFilePath() throws URISyntaxException {
-//		 return Paths.get(App.class.getClassLoader().getResource("Vehicle Survey Coding Challenge sample data.txt").toURI());
-		return Paths.get(App.class.getClassLoader().getResource("testSurvay.txt").toURI());
+		 return Paths.get(SurveyApplication.class.getClassLoader().getResource("Vehicle Survey Coding Challenge sample data.txt").toURI());
 	}
 
 	static void printData(Path path) {
