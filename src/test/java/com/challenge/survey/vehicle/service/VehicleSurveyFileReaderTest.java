@@ -16,7 +16,6 @@ import org.junit.rules.TemporaryFolder;
 
 import com.challenge.survey.vehicle.model.SurveyData;
 
-
 public class VehicleSurveyFileReaderTest {
 
 	private VehicleSurveyFileReader surveyFileReader;
