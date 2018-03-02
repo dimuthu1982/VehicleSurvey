@@ -17,5 +17,5 @@ Further Improvements
 2.	Adopt Dependency Injection
 
 Solution:
-1. The solution uses Java8 to read the survey file and process the data.
+1. Uses Java8, Junit4, Buildr and collector diign patterns with OOP concepts
 2. The file should be located under src\main\resources folder by the name "Vehicle Survey Coding Challenge sample data.txt"
