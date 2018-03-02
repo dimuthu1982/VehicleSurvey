@@ -27,8 +27,10 @@ public class SurveyFileReader implements AutoCloseable {
 	}
 
 	private SurveyFileReader open() throws FileReaderSrviceException {
+		
+		File file = getFileByPath();
+
 		try {
-			File file = new File(filePath.toUri());
 
 			inputStream = new FileInputStream(file);
 			scanner = new Scanner(inputStream, "UTF-8");
@@ -37,6 +39,16 @@ public class SurveyFileReader implements AutoCloseable {
 		} catch (FileNotFoundException e) {
 			throw new FileReaderSrviceException("Error in reading file : " + filePath.toUri(), e);
 		}
+	}
+
+	private File getFileByPath() throws FileReaderSrviceException {
+		File file = new File(filePath.toUri());
+		
+		if(file.length() == 0) {
+			throw new FileReaderSrviceException("File is empty" + filePath.toUri());
+		}
+		
+		return file;
 	}
 
 	public boolean hasMoreData() {
