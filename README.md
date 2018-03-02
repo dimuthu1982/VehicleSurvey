@@ -10,3 +10,7 @@ Further Improvements
 
 1.	Replace System.out with logger
 2.	Adopt Dependency Injection
+
+Solution:
+1. The solution uses Java8 to read the survey file and process the data.
+2. The file should be located under src\main\resources folder by the name "Vehicle Survey Coding Challenge sample data.txt"
