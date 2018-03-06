@@ -38,7 +38,7 @@ public class TimePeriodStatCollector extends AbstractTimePeriodStatCollector<Cou
 
 	@Override
 	public void printStatistics() {
-		System.out.println("\n------------------------ " + periodTypeMessage + " ------------------------");
+		System.out.println("\n------------------------ "+periodTypeMessage+" ------------------------");
 		List<CountingStatistics>  filteredStatistics = getStatistics().stream().filter(CountingStatistics::isStatistic).collect(Collectors.<CountingStatistics>toList()); 
 		
 		if(filteredStatistics.isEmpty()) {

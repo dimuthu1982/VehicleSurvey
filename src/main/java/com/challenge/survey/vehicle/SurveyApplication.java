@@ -3,6 +3,7 @@ package com.challenge.survey.vehicle;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 import com.challenge.survey.vehicle.builder.IStatCollectorBuilder;
 import com.challenge.survey.vehicle.builder.VehicleSurveyStatCollectorBuilder;
@@ -15,6 +16,7 @@ import com.challenge.survey.vehicle.service.VehicleSurveyFileReader;
 import com.challenge.survey.vehicle.service.VehicleSurveyStatCollectIterator;
 
 public class SurveyApplication {
+	
 	public static void main(String[] args) throws URISyntaxException, FileReaderSrviceException {
 		Path path = getFilePath();
 

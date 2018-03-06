@@ -51,6 +51,7 @@ public class VehicleSurveyFileReader extends AbstractSurveyFileReader implements
 
 		String dataLine2 = fileReader.readLines(2);
 		String dataLine = dataLine1.concat(SurveyFileReader.DELIMETER).concat(dataLine2);
+
 		if (downStreamMatch.matcher(dataLine).find()) {
 			return dataLine;
 		}

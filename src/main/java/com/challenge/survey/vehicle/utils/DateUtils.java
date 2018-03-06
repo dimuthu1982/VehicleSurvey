@@ -7,6 +7,8 @@ import java.time.temporal.ChronoUnit;
 public class DateUtils {
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	
+	private DateUtils() {}
 
 	public static String formatTime(LocalTime localTime) {
 		return localTime.format(formatter);
@@ -35,12 +37,5 @@ public class DateUtils {
 	public static boolean isLocalDateBetween(LocalTime localDate1, LocalTime localDate2, LocalTime pivotDate) {
 		return localDate1.isBefore(pivotDate) && localDate2.isAfter(pivotDate);
 	}
-	
-	/*public static LocalTime truncatedToSeconds(LocalTime time) {
-		System.out.println("truncatedToSeconds 1: " + time);
-		System.out.println("truncatedToSeconds 2: " + time.truncatedTo(ChronoUnit.SECONDS));
-		return time.truncatedTo(ChronoUnit.SECONDS);
-	}*/
-	
 	
 }

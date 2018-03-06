@@ -28,7 +28,8 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 
 	@Override
 	public void printStatisticFeeders() {
-		System.out.println("\n------------------------ " + surveyStatisticDataCollection.getStatisticTypes()+ " (Peek Times)------------------------");
+		
+		System.out.println("\n------------------------ "+surveyStatisticDataCollection.getStatisticTypes()+" (Peek Times)------------------------");
 		printUpStreamData();
 		printDownStreamData();
 	}
@@ -44,7 +45,7 @@ public class PeekTimeCalculationFeeder implements ISurveyStatisticFeeder {
 	}
 
 	private void printUpStreamData() {
-		if (peekTimesUpStream != null || !peekTimesUpStream.isEmpty()) {
+		if (peekTimesUpStream != null && !peekTimesUpStream.isEmpty()) {
 
 			long vehiclesCount = peekTimesUpStream.get(0).getUpStreamCount();
 			

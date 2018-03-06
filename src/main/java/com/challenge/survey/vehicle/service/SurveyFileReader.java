@@ -5,14 +5,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.challenge.survey.vehicle.exceptions.FileReaderSrviceException;
 
 public class SurveyFileReader implements AutoCloseable {
 
+	private final Logger logger = Logger.getLogger(SurveyFileReader.class.getName());
+	
 	private Path filePath;
 
 	private FileInputStream inputStream = null;
@@ -55,15 +62,16 @@ public class SurveyFileReader implements AutoCloseable {
 		return scanner.hasNextLine();
 	}
 
-	public String readLines(int numberOflines) throws FileReaderSrviceException {
+	public String readLines(int numberOflines) {
 		return readLines(numberOflines, DELIMETER);
 	}
 
-	public String readLines(int numberOflines, String delimeter) throws FileReaderSrviceException {
-		return String.format("%s%s%S", readLine(), delimeter, readLine());
+	public String readLines(int numberOflines, String delimeter) {
+		List<String> dataList = IntStream.range(0,numberOflines).boxed().map(i -> readLine()).collect(Collectors.toList());
+		return String.join(delimeter, dataList);
 	}
 
-	private String readLine() throws FileReaderSrviceException {
+	private String readLine(){
 		return Optional.of(scanner.nextLine()).filter(Objects::nonNull).orElse(null);
 	}
 
@@ -73,12 +81,10 @@ public class SurveyFileReader implements AutoCloseable {
 			try {
 				br.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.log(Level.WARNING, "Error in closing input stream", e);
 			}
 		});
 
-		Optional.of(scanner).ifPresent(fr -> {
-			fr.close();
-		});
+		Optional.of(scanner).ifPresent(Scanner::close);
 	}
 }
